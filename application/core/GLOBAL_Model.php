@@ -7,12 +7,6 @@
 			parent::__construct();
 			$this->load->database();
 		}
-		
-		/*
-		 * helper untuk mempermudah proses yang berulang
-		 * metode insert,update,delete dibuat disini
-		 * get data yang berbeda juga disini
-		 * **/
 		// get data
 		public function get_array_of_table($table)
 		{

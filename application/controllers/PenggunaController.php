@@ -11,7 +11,7 @@ class PenggunaController extends GLOBAL_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('AuthModel');
+        $this->load->model('PenggunaModel');
 
         if (parent::hasLogin())
         {
@@ -19,9 +19,21 @@ class PenggunaController extends GLOBAL_Controller
         }
     }
     public function index(){
-        $data['title'] = 'Berkas SIMRP';
-        $data['page_title'] = '';
-        $data['menu'] = '';
+        $data['title'] = 'Dashboard';
         parent::template('dashboard/index',$data);
+    }
+    public function daftar(){
+        $data['title'] = "Daftar Pengguna";
+        $data['data'] = parent::model('PenggunaModel')->get_pengguna()->result();
+        parent::template('pengguna/index',$data);
+    }
+    public function tambah(){
+        if(isset($_POST['submit'])){
+
+        }
+        else{
+            $data['title'] = "Pengguna";
+            parent::template('pengguna/tambah_pengguna',$data);
+        }
     }
 }

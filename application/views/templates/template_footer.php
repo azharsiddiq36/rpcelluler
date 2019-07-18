@@ -345,6 +345,14 @@
 <script src="<?= base_url()?>assets/vendors/js/base/core.min.js"></script>
 <!-- End Vendor Js -->
 <!-- Begin Page Vendor Js -->
+<script src="<?= base_url()?>assets/vendors/js/datatables/datatables.min.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/dataTables.buttons.min.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/jszip.min.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/buttons.html5.min.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/pdfmake.min.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/vfs_fonts.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/datatables/buttons.print.min.js"></script>
+
 <script src="<?= base_url()?>assets/vendors/js/nicescroll/nicescroll.min.js"></script>
 <script src="<?= base_url()?>assets/vendors/js/chart/chart.min.js"></script>
 <script src="<?= base_url()?>assets/vendors/js/progress/circle-progress.min.js"></script>
@@ -354,6 +362,8 @@
 <script src="<?= base_url()?>assets/vendors/js/app/app.js"></script>
 <!-- End Page Vendor Js -->
 <!-- Begin Page Snippets -->
+<script src="<?= base_url()?>assets/js/components/validation/validation.min.js"></script>
+<script src="<?= base_url()?>assets/js/components/tables/tables.js"></script>
 <script src="<?= base_url()?>assets/js/dashboard/db-default.js"></script>
 <!-- End Page Snippets -->
 </body>

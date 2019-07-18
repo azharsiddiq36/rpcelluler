@@ -1,22 +1,21 @@
 <?php
 	
 	class AuthModel extends  GLOBAL_Model {
-		
-		public function __construct()
-		{
-			parent::__construct();
-		}
-		
-		public function get_pengguna($username,$password)
+
+        public function __construct()
+        {
+            parent::__construct();
+        }
+
+        public function get_pengguna($username,$password)
 		{
 			$user = array(
-				'nama_pengguna' => $username,
-				'sandi_pengguna' => $password
+				'pengguna_nama' => $username,
+				'pengguna_password' => $password
 			);
-			
-			return parent::get_object_of_row('pengguna',$user);
-			
+			return parent::get_object_of_row('tbl_pengguna',$user);
+
 		}
-		
-		
-	}
+
+
+    }

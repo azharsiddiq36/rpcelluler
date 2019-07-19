@@ -59,8 +59,8 @@
                                 ?>
 
                                 <td class="td-actions">
+                                    <a class ="btn-detail"data-id = "<?= $key->pengguna_id?>" data-toggle="modal" data-target="#modal_pengguna"><i class="la la-eye edit"></i></a>
                                     <a href="<?= base_url("edit_pengguna/".$key->pengguna_id)?>"><i class="la la-edit edit"></i></a>
-                                    <a id = "btn-detail"data-id = "<?= $key->pengguna_id?>" data-toggle="modal" data-target="#modal_pengguna"><i class="la la-eye edit"></i></a>
                                     <a href="<?= base_url("delete_pengguna/".$key->pengguna_id)?>"><i class="la la-close delete"></i></a>
                                 </td>
                             </tr>

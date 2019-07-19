@@ -84,7 +84,8 @@ class PenggunaController extends GLOBAL_Controller
         }
     }
     public function detail(){
-        $id = 4;
+        $id = parent::post("pengguna_id");
+
         $param = array("pengguna_id"=>$id);
         $isi = parent::model("PenggunaModel")->getOne($param);
         echo json_encode($isi);

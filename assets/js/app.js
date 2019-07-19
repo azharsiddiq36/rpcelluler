@@ -1,8 +1,9 @@
 $(document).ready(function () {
-    $('#btn-detail').click(function(event){
+    $('.btn-detail').click(function(event){
                 var local = window.location.origin+'/ci/rpcelluler/';
         var url = local+"detail_pengguna";
         var data = $(this).data('id');
+
         $.ajax({
             url : url,
             type : 'ajax',
@@ -11,6 +12,7 @@ $(document).ready(function () {
             async:true,
             data : {"pengguna_id":data},
             success:function (response) {
+
                 $('#nomor').html(response.pengguna_nomor);
                 $('#foto').html(response.pengguna_foto);
                 $('#nama').html(response.pengguna_nama);

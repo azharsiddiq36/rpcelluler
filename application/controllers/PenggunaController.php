@@ -40,7 +40,7 @@ class PenggunaController extends GLOBAL_Controller
                 "pengguna_status"=>"nonaktif",
                 "pengguna_foto"=>"user.png",
                 "pengguna_nama"=>$nama,
-                "pengguna_password"=>$password,
+                "pengguna_password"=>md5($password),
                 "pengguna_email" =>$email,
                 "pengguna_nomor" => $nomor,
                 "pengguna_alamat" =>$alamat,
@@ -84,7 +84,10 @@ class PenggunaController extends GLOBAL_Controller
         }
     }
     public function detail(){
-        $data['title'] = "Pengguna";
+        $id = 4;
+        $param = array("pengguna_id"=>$id);
+        $isi = parent::model("PenggunaModel")->getOne($param);
+        echo json_encode($isi);
     }
     public function delete(){
         $data['title'] = "Pengguna";

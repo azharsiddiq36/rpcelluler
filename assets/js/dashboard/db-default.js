@@ -9,6 +9,7 @@
 		return (Math.random() > 0.5 ? 1.0 : 1.0) * Math.round(Math.random() * 100);
 	};
 
+
 	Chart.helpers.drawRoundedTopRectangle = function (ctx, x, y, width, height, radius) {
 		ctx.beginPath();
 		ctx.moveTo(x + radius, y);

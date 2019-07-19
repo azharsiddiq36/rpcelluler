@@ -17,7 +17,7 @@
             <!-- Sorting -->
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
-                    <h4>Sorting</h4>
+                    <h4>Tabel Pengguna</h4>
                 </div>
                 <div class="widget-body">
                     <div class="table-responsive">
@@ -37,7 +37,7 @@
 
                             <?php
                             $no = 1;
-                            foreach ($data as $key):?>
+                            foreach ($data as $key){?>
                             <tr>
                                 <td><span class="text-primary"><?= $no++?></span></td>
                                 <td><?= $key->pengguna_nama?></td>
@@ -58,11 +58,12 @@
                                 ?>
 
                                 <td class="td-actions">
-                                    <a href="#"><i class="la la-edit edit"></i></a>
-                                    <a href="#"><i class="la la-close delete"></i></a>
+                                    <a href="<?= base_url("edit_pengguna/".$key->pengguna_id)?>"><i class="la la-edit edit"></i></a>
+                                    <a href="<?= base_url("detail_pengguna/".$key->pengguna_id)?>"><i class="la la-eye edit"></i></a>
+                                    <a href="<?= base_url("delete_pengguna/".$key->pengguna_id)?>"><i class="la la-close delete"></i></a>
                                 </td>
                             </tr>
-                            <?php endforeach;?>
+                            <?php }?>
 
 
                             </tbody>

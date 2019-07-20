@@ -1,5 +1,12 @@
 <div class="container-fluid">
     <!-- Begin Page Header-->
+    <?php if ($this->session->flashdata('msg')){
+        ?>
+        <div class="alert alert-warning" role="alert">
+            <strong>Maaf !</strong> <?= $this->session->flashdata('msg')?>
+        </div>
+        <?php
+    }?>
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">

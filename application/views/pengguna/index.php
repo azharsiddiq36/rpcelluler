@@ -1,5 +1,13 @@
 <div class="container-fluid">
     <!-- Begin Page Header-->
+    <?php if ($this->session->flashdata('msg')){
+        ?>
+        <div class="auto-hide alert alert-success" role="alert">
+            <strong>Selamat !</strong> <?= $this->session->flashdata('msg')?>
+        </div>
+        <?php
+    }?>
+
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
@@ -61,7 +69,7 @@
                                 <td class="td-actions">
                                     <a class ="btn-detail"data-id = "<?= $key->pengguna_id?>" data-toggle="modal" data-target="#modal_pengguna"><i class="la la-eye edit"></i></a>
                                     <a href="<?= base_url("edit_pengguna/".$key->pengguna_id)?>"><i class="la la-edit edit"></i></a>
-                                    <a href="<?= base_url("delete_pengguna/".$key->pengguna_id)?>"><i class="la la-close delete"></i></a>
+                                    <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" href="<?= base_url("delete_pengguna/".$key->pengguna_id)?>"><i class="la la-close delete"></i></a>
                                 </td>
                             </tr>
                             <?php }?>
@@ -77,6 +85,7 @@
         </div>
     </div>
     <!-- Begin Centered Modal -->
+
     <div id="modal_pengguna" class="modal fade">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

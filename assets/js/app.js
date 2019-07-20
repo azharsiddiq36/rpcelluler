@@ -27,28 +27,8 @@ $(document).ready(function () {
             }
         });
     });
+    $('.auto-hide').delay(3000).fadeOut("slow", function(){ // first animation delayed 10 secs
+    });
+
 });
-// $(document).ready(function () {
-//     $('#modal_pengguna').on('show.bs.modal', function(event){
-//         var local = window.location.origin+'/ci/rpcelluler/';
-//         var url = local+"detail_pengguna";
-//         console.log("bangsut");
-//         var data = $(event.relatedTarget).data('id');
-//         $.ajax({
-//             url : url,
-//             type : 'ajax',
-//             dataType:'json',
-//             method : 'POST',
-//             async:true,
-//             data : {"pengguna_id":data},
-//             success:function (response) {
-//                 var data = "ayam";
-//                 console.log(data);
-//             },
-//             error:function(data){
-//
-//             }
-//         });
-//
-//     });
-// });
+

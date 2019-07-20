@@ -367,6 +367,8 @@
 <script src="<?= base_url()?>assets/js/components/tables/tables.js"></script>
 <script src="<?= base_url()?>assets/js/dashboard/db-default.js"></script>
 <script src ="<?= base_url()?>assets/js/app.js"></script>
+<script src="<?= base_url()?>assets/vendors/js/noty/noty.min.js"></script>
+<script src="<?= base_url()?>assets/js/components/notifications/notifications.min.js"></script>
 <!-- End Page Snippets -->
 </body>
 </html>

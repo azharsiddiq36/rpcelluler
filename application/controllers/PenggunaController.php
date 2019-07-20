@@ -36,19 +36,28 @@ class PenggunaController extends GLOBAL_Controller
             $hak_akses = parent::post("pengguna_hak_akses");
             $alamat = parent::post("pengguna_alamat");
             $nomor = parent::post("pengguna_nomor");
-            $data = array(
-                "pengguna_status"=>"nonaktif",
-                "pengguna_foto"=>"user.png",
-                "pengguna_nama"=>$nama,
-                "pengguna_password"=>md5($password),
-                "pengguna_email" =>$email,
-                "pengguna_nomor" => $nomor,
-                "pengguna_alamat" =>$alamat,
-                "pengguna_hak_akses" =>$hak_akses,
-                "pengguna_jk"=>$jk
-            );
-            parent::model("PenggunaModel")->post_pengguna($data);
-            redirect("pengguna");
+            $data = array("pengguna_email"=>$email);
+            if (parent::model("PenggunaModel")->checkMail($data)->num_rows()<1){
+                $data = array(
+                    "pengguna_status"=>"nonaktif",
+                    "pengguna_foto"=>"user.png",
+                    "pengguna_nama"=>$nama,
+                    "pengguna_password"=>md5($password),
+                    "pengguna_email" =>$email,
+                    "pengguna_nomor" => $nomor,
+                    "pengguna_alamat" =>$alamat,
+                    "pengguna_hak_akses" =>$hak_akses,
+                    "pengguna_jk"=>$jk
+                );
+                parent::model("PenggunaModel")->post_pengguna($data);
+                parent::alert("msg","Berhasil Menambahkan Data !!!");
+                redirect("pengguna");
+            }
+            else{
+                $data['title'] = "Pengguna";
+                parent::alert("msg","Email Telah Tedaftar !!!");
+                parent::template('pengguna/tambah_pengguna',$data);
+            }
         }
         else{
             $data['title'] = "Pengguna";
@@ -73,6 +82,7 @@ class PenggunaController extends GLOBAL_Controller
                 "pengguna_jk"=>$jk
             );
             parent::model("PenggunaModel")->editPengguna($id,$data);
+            parent::alert("msg","Berhasil Memperbarui Data !!!");
             redirect("pengguna");
         }
         else{
@@ -95,6 +105,7 @@ class PenggunaController extends GLOBAL_Controller
         $id = $this->uri->segment(2);
         $data = array("pengguna_id"=>$id);
         parent::model("PenggunaModel")->deletePengguna($data);
+        parent::alert("msg","Berhasil Menghapus Data !!!");
         redirect("pengguna");
     }
 }

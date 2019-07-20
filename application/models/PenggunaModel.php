@@ -25,5 +25,8 @@
         public function deletePengguna($data){
             return parent::delete_row($this->initTable(),$data);
         }
+        public function checkMail($data){
+            return parent::get_object_of_row($this->initTable(),$data);
+        }
 
     }

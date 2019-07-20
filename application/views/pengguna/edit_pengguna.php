@@ -12,7 +12,7 @@
             <!-- Form -->
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
-                    <h4>Form Tambah Pengguna</h4>
+                    <h4>Form Edit Pengguna</h4>
                 </div>
                 <div class="widget-body">
                     <form class="needs-validation" action="<?= base_url("edit_pengguna/" . $row['pengguna_id']) ?>"

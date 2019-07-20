@@ -19,16 +19,34 @@
             <!-- Form -->
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
-                    <h4>Form Tambah Provider</h4>
+                    <h4>Form Tambah Kios</h4>
                 </div>
                 <div class="widget-body">
-                    <form class="needs-validation" action="<?= base_url("tambah_provider")?>" method="post" novalidate>
+                    <form class="needs-validation" action="<?= base_url("tambah_kios")?>" method="post" novalidate>
                         <div class="form-group row d-flex align-items-center mb-5">
                             <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Nama</label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" name = "provider_nama" placeholder="Masukkan Nama" required>
+                                <input type="text" class="form-control" name = "kios_nama" placeholder="Masukkan Nama Kios" required>
                                 <div class="invalid-feedback">
                                     Nama Tidak Boleh Kosong
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Cabang</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name = "kios_cabang" placeholder="Masukkan Cabang Kios" required>
+                                <div class="invalid-feedback">
+                                    Cabang Tidak Boleh Kosong
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Alamat *</label>
+                            <div class="col-lg-5">
+                                <textarea class="form-control" name = "kios_alamat" placeholder="Alamat" required></textarea>
+                                <div class="invalid-feedback">
+                                    Alamat tidak boleh kosong
                                 </div>
                             </div>
                         </div>

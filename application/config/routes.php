@@ -41,6 +41,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $route['edit_provider/(:any)'] = 'ProviderController/edit/$1';
     $route['delete_provider/(:any)'] = 'ProviderController/delete/$1';
     $route['detail_provider'] = 'ProviderController/detail';
+
+    //Kios
+    $route['kios'] = 'KiosController/daftar';
+    $route['tambah_kios'] = 'KiosController/tambah';
+    $route['edit_kios/(:any)'] = 'KiosController/edit/$1';
+    $route['delete_kios/(:any)'] = 'KiosController/delete/$1';
+    $route['detail_kios'] = 'KiosController/detail';
+    
 	// authentication
 	$route['logout'] = 'AdminController/logout';
     $route['login'] = 'AuthController/login';

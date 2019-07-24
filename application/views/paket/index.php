@@ -7,7 +7,6 @@
         </div>
         <?php
     }?>
-
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
@@ -20,6 +19,63 @@
             </div>
         </div>
     </div>
+    <div class="row flex-row">
+        <div class="col-xl-12 col-md-6">
+
+            <div class="widget widget-09 has-shadow">
+
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Update Stok</h4>
+                </div>
+
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-xl-10 col-12 no-padding">
+                            <form class="needs-validation" action="<?= base_url("update_stok")?>" method="post" novalidate>
+                                <div class="form-group row">
+                                    <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Code Paket *</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="select">
+                                                    <select id="code-paket" name="paket_provider_id" class="custom-select form-control" required>
+                                                        <option value="0">Code</option>
+                                                        <?php foreach ($data as $key):
+                                                            ?>
+                                                            <option value="<?= $key->paket_id?>"><?= substr($key->provider_nama,0,2)."-".$key->paket_id?></option>
+                                                        <?php
+                                                        endforeach;
+                                                        ?>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select an option
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input id="nama" type="text" readonly required placeholder="Nama" class="form-control">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input id="provider" type="text" required readonly="" placeholder="Provider" class="form-control">
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <input required id="stok" name = "stok" type="number" placeholder="Stok" class="form-control">
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button class="btn btn-gradient-04" name = "submit"type="submit">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-xl-12">
@@ -34,6 +90,7 @@
                             <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Code Paket</th>
                                 <th>Nama Paket</th>
                                 <th>Provider</th>
                                 <th>Harga Satuan</th>
@@ -47,6 +104,7 @@
                             foreach ($data as $key){?>
                             <tr>
                                 <td><span class="text-primary"><?= $no++?></span></td>
+                                <td><?= substr($key->provider_nama,0,2)."-".$key->paket_id?></td>
                                 <td><?= $key->paket_nama?></td>
                                 <td><?= $key->provider_nama?></td>
                                 <td>Rp. <?= $key->paket_harga_satuan?></td>

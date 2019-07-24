@@ -27,8 +27,16 @@
         }
         public function getJoin(){
             $this->db->select('*');
-            $this->db->from('tbl_paket');
+            $this->db->from($this->initTable());
             $this->db->join('tbl_provider', 'tbl_provider.provider_id = tbl_paket.paket_provider_id');
+            $query = $this->db->get();
+            return $query;
+        }
+        public function getOneJoin($id){
+            $this->db->select('*');
+            $this->db->from($this->initTable());
+            $this->db->join('tbl_provider', 'tbl_provider.provider_id = tbl_paket.paket_provider_id');
+            $this->db->where('paket_id',$id);
             $query = $this->db->get();
             return $query;
         }

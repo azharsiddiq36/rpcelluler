@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.btn-detail').click(function(event){
-                var local = window.location.origin+'/ci/rpcelluler/';
+        var local = window.location.origin+'/ci/rpcelluler/';
         var url = local+"detail_pengguna";
         var data = $(this).data('id');
 
@@ -28,6 +28,38 @@ $(document).ready(function () {
         });
     });
     $('.auto-hide').delay(3000).fadeOut("slow", function(){ // first animation delayed 10 secs
+    });
+    $('#code-paket').change(function () {
+       var value =$(this).val();
+       var local = window.location.origin+'/ci/rpcelluler/';
+       var url = local+"detail_paket";
+
+       $.ajax({
+            url : url,
+            type : 'ajax',
+            dataType:'json',
+            method : 'POST',
+            async:true,
+            data : {"paket_id":value},
+            success:function (response) {
+                var nama,provider,stok;
+                if (value == 0){
+                    nama = null;
+                    provider = null;
+                    stok = null;
+                }else{
+                    nama = response.paket_nama;
+                    provider = response.provider_nama;
+                    stok = response.paket_stok;
+                }
+                document.getElementById("nama").value = nama;
+                document.getElementById("provider").value = provider;
+                document.getElementById("stok").value = stok;
+            },
+            error:function(data){
+
+            }
+       });
     });
 
 });

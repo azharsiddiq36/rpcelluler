@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $route['paket'] = 'PaketController/daftar';
     $route['tambah_paket'] = 'PaketController/tambah';
     $route['edit_paket/(:any)'] = 'PaketController/edit/$1';
+    $route['update_stok'] = 'PaketController/update_stok';
     $route['delete_paket/(:any)'] = 'PaketController/delete/$1';
     $route['detail_paket'] = 'PaketController/detail';
     

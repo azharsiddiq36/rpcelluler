@@ -71,36 +71,35 @@ Author: SAEROX
                     </a>
                 </div>
                 <h3>Masuk ke Rp Celluler</h3>
-                <form>
+                <div class="auto-hide alert alert-warning" role="alert">
+                    <strong>Maaf, </strong> <?= $this->session->flashdata('msg')?>
+                </div>
+                <form action="<?= base_url('login')?>" method="post">
                     <div class="group material-input">
-                        <input type="text" required>
+                        <input type="text" name = "email" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Email</label>
                     </div>
                     <div class="group material-input">
-                        <input type="password" required>
+                        <input type="password" name = "password" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Password</label>
                     </div>
-                </form>
-                <div class="row">
-                    <div class="col text-left">
-                        <div class="styled-checkbox">
-                            <input type="checkbox" name="checkbox" id="remeber">
-                            <label for="remeber">Remember me</label>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a href="pages-forgot-password.html">Forgot Password ?</a>
                         </div>
                     </div>
-                    <div class="col text-right">
-                        <a href="pages-forgot-password.html">Forgot Password ?</a>
+                    <div class="sign-btn text-center">
+                        <button type="submit" name="submit" class="btn btn-lg btn-gradient-01">
+                            Masuk
+                        </button>
                     </div>
-                </div>
-                <div class="sign-btn text-center">
-                    <a href="db-default.html" class="btn btn-lg btn-gradient-01">
-                        Sign in
-                    </a>
-                </div>
+                </form>
+
+
                 <div class="register">
                     Don't have an account?
                     <br>
@@ -120,6 +119,7 @@ Author: SAEROX
 <!-- End Vendor Js -->
 <!-- Begin Page Vendor Js -->
 <script src="<?= base_url()?>assets/vendors/js/app/app.min.js"></script>
+<script src ="<?= base_url()?>assets/js/app.js"></script>
 <!-- End Page Vendor Js -->
 </body>
 </html>

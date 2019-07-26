@@ -7,10 +7,6 @@
 		{
 			parent::__construct();
 			$this->load->model('AuthModel');
-			if (parent::hasLogin())
-			{
-				redirect(site_url('dashboard'));
-			}
 		}
         public function index()
         {
@@ -23,32 +19,39 @@
 		
 		public function login()
 		{
-			$data['title'] = 'Masuk ke Sistem Informasi Registrasi Pernikahan';
-			if (isset($_POST['masuk'])){
-				$username = parent::post('username');
+			$data['title'] = 'Masuk ke Rp Celluler';
+			if (isset($_POST['submit'])){
+				$username = parent::post('email');
 				$password = parent::post('password');
-				$loginData = parent::model('AuthModel')->get_pengguna($username,$password);
+				$loginData = parent::model('AuthModel')->get_pengguna($username,md5($password));
 				$existsStatus = $loginData->num_rows();
 				$existsData   = $loginData->row_array();
-				
 				if ($existsStatus > 0)
 				{
 					$sessData = array(
-						'sess_id' => $existsData['pengguna_id'],
-						'sess_user' => $existsData['nama_pengguna'],
-						'sess_level' => $existsData['level_pengguna']
+                        'pengguna_jk' => $existsData['pengguna_jk'],
+                        'pengguna_alamat' => $existsData['pengguna_alamat'],
+                        'pengguna_nomor' => $existsData['pengguna_nomor'],
+                        'pengguna_foto' => $existsData['pengguna_foto'],
+                        'pengguna_email' => $existsData['pengguna_email'],
+                        'pengguna_id' => $existsData['pengguna_id'],
+						'pengguna_nama' => $existsData['pengguna_nama'],
+						'pengguna_hak_akses' => $existsData['pengguna_hak_akses']
 					);
 					$this->session->set_userdata($sessData);
-					parent::alert('alert','welcome');
 					redirect(site_url('dashboard'));
 				}else{
-					parent::alert('alert','invalid');
+					parent::alert('msg','Email atau Password Salah');
 					redirect(site_url());
 				}
 			}else{
 				parent::authPage('auth/login',$data);
 			}
 		}
+		public function logout(){
+		    session_destroy();
+		    redirect('login');
+        }
 		
 		
 	}

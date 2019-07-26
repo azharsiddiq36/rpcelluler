@@ -180,7 +180,7 @@ Author: SAEROX
                                     Faq
                                 </a>
                             </li>
-                            <li><a rel="nofollow" href="pages-login.html" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
+                            <li><a rel="nofollow" onclick="return confirm('Apakah anda yakin ingin keluar?')" href="<?= base_url('logout')?>" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
                         </ul>
                     </li>
                     <!-- End User -->
@@ -203,7 +203,7 @@ Author: SAEROX
                 <ul class="list-unstyled">
                     <li <?php if ($this->uri->segment(1)=='dashboard'){echo "class = 'active'";}?>><a href="<?= base_url("dashboard")?>"><i class="la la-spinner"></i><span>Dashboard</span></a></li>
                     <li><a href="#dropdown-db" aria-expanded="true" data-toggle="collapse"><i class="la la-columns"></i><span>Table Master</span></a>
-                        <ul id="dropdown-db" class="collapse list-unstyled show pt-0">
+                        <ul id="dropdown-db" class="collapse list-unstyled pt-0 <?php if ($this->uri->segment(1)=='pengguna'||$this->uri->segment(1)=='provider'||$this->uri->segment(1)=='paket'||$this->uri->segment(1)=='kios'){echo 'show';}?>">
                             <li><a <?php if ($this->uri->segment(1)=='pengguna'){echo "class = 'active'";}?> href="<?= base_url("pengguna")?>">Pengguna</a></li>
                             <li><a <?php if ($this->uri->segment(1)=='provider'){echo "class = 'active'";}?> href="<?= base_url("provider")?>">Provider</a></li>
                             <li><a <?php if ($this->uri->segment(1)=='paket'){echo "class = 'active'";}?> href="<?= base_url("paket")?>">Paket</a></li>
@@ -211,12 +211,11 @@ Author: SAEROX
                         </ul>
                     </li>
                     <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Table Transaksi</span></a>
-                        <ul id="dropdown-app" class="collapse list-unstyled pt-0">
-                            <li><a <?php if ($this->uri->segment(1)=='transaksi'){echo "class = 'active'";}?> href="<?= base_url("transaksi")?>">Daftar Transaksi</a></li>
-                            <li><a <?php if ($this->uri->segment(1)=='transaksi_hari'){echo "class = 'active'";}?> href="<?= base_url("transaksi_hari")?>">Hari ini</a></li>
-                            <li><a <?php if ($this->uri->segment(1)=='transaksi_minggu'){echo "class = 'active'";}?> href="<?= base_url("transaksi_minggu")?>">Minggu ini</a></li>
-                            <li><a <?php if ($this->uri->segment(1)=='transaksi_bulan'){echo "class = 'active'";}?> href="<?= base_url("transaksi_bulan")?>">Bulan ini</a></li>
-                            <li><a <?php if ($this->uri->segment(1)=='transaksi_tahun'){echo "class = 'active'";}?> href="<?= base_url("transaksi_tahun")?>">Tahun ini</a></li>
+                        <ul id="dropdown-app" class="collapse list-unstyled <?php if ($this->uri->segment(1)=='transaksi'){echo 'show';}?> pt-0">
+                            <li><a <?php if ($this->uri->segment(2)=='daftar'){echo "class = 'active'";}?> href="<?= base_url("transaksi/daftar/default")?>">Daftar Transaksi</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='sekarang'){echo "class = 'active'";}?> href="<?= base_url("transaksi/sekarang/default")?>">Hari ini</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='bulan'){echo "class = 'active'";}?> href="<?= base_url("transaksi/bulan/default")?>">Bulan ini</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='tahun'){echo "class = 'active'";}?> href="<?= base_url("transaksi/tahun/default")?>">Tahun ini</a></li>
 
                         </ul>
                     </li>

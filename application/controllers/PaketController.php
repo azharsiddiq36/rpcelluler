@@ -13,10 +13,9 @@ class PaketController extends GLOBAL_Controller
         parent::__construct();
         $this->load->model('PaketModel');
         $this->load->model('ProviderModel');
-
-        if (parent::hasLogin())
-        {
-            redirect(site_url('login'));
+        $this->load->model('TransaksiModel');
+        if ($this->session->userdata['pengguna_id'] == null){
+            redirect('login');
         }
     }
     public function index(){
@@ -55,8 +54,24 @@ class PaketController extends GLOBAL_Controller
     public function update_stok(){
         $id = parent::post("paket_provider_id");
         $stok = parent::post("stok");
+        $param = array("paket_id"=>$id);
+        $paket = parent::model("PaketModel")->getOne($param);
+        $jumlah = $stok-$paket['paket_stok'];
+        $total = $jumlah*$paket['paket_harga_satuan'];
+        $jenis = 'kredit';
+        $kios = 3;
+        $pengguna = $this->session->userdata['pengguna_id'];
         $data = array("paket_stok"=>$stok);
         parent::model("PaketModel")->editPaket($id,$data);
+        $data = array(
+            "transaksi_jumlah"=>$jumlah,
+            "transaksi_total"=>$total,
+            "transaksi_jenis"=>$jenis,
+            "transaksi_kios_id"=>$kios,
+            "transaksi_paket_id"=>$id,
+            "transaksi_pengguna_id"=>$pengguna,
+            "transaksi_keterangan"=>"Penambahan Stok Paket" );
+        parent::model("TransaksiModel")->post_transaksi($data);
         parent::alert("msg","Berhasil Menambahkan Stok !!!");
         redirect("paket");
     }

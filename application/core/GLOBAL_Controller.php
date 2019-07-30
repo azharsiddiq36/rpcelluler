@@ -9,11 +9,6 @@ class GLOBAL_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->has_userdata('sess_id')) {
-			$this->userID = $this->session->userdata('sess_id');
-			$this->userName = $this->session->userdata('sess_user');
-			$this->userLevel = $this->session->userdata('sess_level');
-		}
 	}
 	
 	/*
@@ -22,6 +17,12 @@ class GLOBAL_Controller extends CI_Controller {
 	 * */
 	
 	// system helper
+    public function setRule(){
+        $hak = $this->session->userdata['pengguna_hak_akses'];
+        if ($this->uri->segment(3) != $hak && $hak != "administrator"){
+            redirect(base_url('dashboard'));
+        };
+    }
 	public function model($model)
 	{
 		return $this->$model;

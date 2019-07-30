@@ -61,6 +61,38 @@ $(document).ready(function () {
             }
        });
     });
+    $('#code-paket2').change(function () {
 
+        var value =$(this).val();
+        var local = window.location.origin+'/ci/rpcelluler/';
+        var url = local+"detail_paket_karyawan";;
+        $.ajax({
+            url : url,
+            type : 'ajax',
+            dataType:'json',
+            method : 'POST',
+            async:true,
+            data : {"paket_id":value},
+            success:function (response) {
+            console.log(url);
+                var nama,provider,stok;
+                if (value == 0){
+                    nama = null;
+                    provider = null;
+                    stok = null;
+                }else{
+                    nama = response.paket_nama;
+                    provider = response.provider_nama;
+                    stok = response.paket_stok;
+                }
+                document.getElementById("nama2").value = nama;
+                document.getElementById("provider2").value = provider;
+                document.getElementById("stok2").value = stok;
+            },
+            error:function(data){
+
+            }
+        });
+    });
 });
 

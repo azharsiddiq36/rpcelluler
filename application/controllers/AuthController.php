@@ -38,8 +38,16 @@
 						'pengguna_nama' => $existsData['pengguna_nama'],
 						'pengguna_hak_akses' => $existsData['pengguna_hak_akses']
 					);
-					$this->session->set_userdata($sessData);
-					redirect(site_url('dashboard'));
+                    $this->session->set_userdata($sessData);
+					if ($existsData['pengguna_hak_akses'] == "administrator" ||
+                        $existsData['pengguna_hak_akses'] == "karyawan" ||
+                        $existsData['pengguna_hak_akses'] == "ketua" ){
+                        redirect(site_url('dashboard'));
+                    }
+                    else{
+                        parent::alert('msg','Hak Akses Kamu Tidak Terdaftar');
+					    redirect("login");
+                    }
 				}else{
 					parent::alert('msg','Email atau Password Salah');
 					redirect(site_url());

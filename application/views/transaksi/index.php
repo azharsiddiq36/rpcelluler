@@ -48,7 +48,17 @@
 
                                     <?php
                                     $no = 1;
-                                    foreach ($data as $key){?>
+                                    $debit = 0;
+                                    $kredit = 0;
+                                    foreach ($data as $key){
+                                        if ($key->transaksi_jenis == "kredit"){
+                                            $kredit += $key->transaksi_total;
+                                        }
+                                        else{
+                                            $debit += $key->transaksi_total;
+                                        }
+                                        ?>
+
                                         <tr>
                                             <td><span class="text-primary"><?= $no++?></span></td>
                                             <td><?= $key->pengguna_nama?></td>
@@ -64,7 +74,9 @@
 
 
                                     </tbody>
+
                                 </table>
+                                <h4 style="float: right;margin: 10px">Total : Rp <?= $debit-$kredit?></h4>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="base-tab-2">
@@ -87,9 +99,10 @@
 
                                     <?php
                                     $no = 1;
+                                    $debit = 0;
                                     foreach ($data as $key){
                                         if($key->transaksi_jenis == "debit"){
-
+                                            $debit += $key->transaksi_total;
                                         ?>
 
                                         <tr>
@@ -110,6 +123,7 @@
 
                                     </tbody>
                                 </table>
+                                <h4 style="float: right;margin: 10px">Total Debit : Rp <?= $debit?></h4>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="base-tab-3">
@@ -132,8 +146,10 @@
 
                                     <?php
                                     $no = 1;
+                                    $kredit = 0;
                                     foreach ($data as $key){
                                         if($key->transaksi_jenis == "kredit"){
+                                            $kredit += $key->transaksi_total;
                                             ?>
                                             <tr>
                                                 <td><span class="text-primary"><?= $no++?></span></td>
@@ -153,7 +169,9 @@
 
                                     </tbody>
                                 </table>
+                                <h4 style="float: right;margin: 10px">Total Kredit : Rp <?= $kredit?></h4>
                             </div>
+
                         </div>
                     </div>
                 </div>

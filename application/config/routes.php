@@ -32,7 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $route['detail_paket'] = 'PaketController/detail';
     //transaksi
     $route['transaksi/(:any)/(:any)'] = 'TransaksiController/daftar/$1/$2';
-    
+    $route['karyawan/debit'] = 'TransaksiController/tambahdebit';
+    $route['karyawan/kredit'] = 'TransaksiController/tambahkredit';
+    $route['karyawan/riwayat'] = 'TransaksiController/riwayat';
+    $route['detail_paket_karyawan'] = 'TransaksiController/detail';
 	// authentication
 	$route['logout'] = 'AuthController/logout';
     $route['login'] = 'AuthController/login';

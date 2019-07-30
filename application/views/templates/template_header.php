@@ -202,7 +202,8 @@ Author: SAEROX
                 <!-- Begin Main Navigation -->
                 <ul class="list-unstyled">
                     <li <?php if ($this->uri->segment(1)=='dashboard'){echo "class = 'active'";}?>><a href="<?= base_url("dashboard")?>"><i class="la la-spinner"></i><span>Dashboard</span></a></li>
-                    <li><a href="#dropdown-db" aria-expanded="true" data-toggle="collapse"><i class="la la-columns"></i><span>Table Master</span></a>
+                    <?php if ($this->session->userdata['pengguna_hak_akses'] == "administrator"){ ?>
+                    <li><a href="#dropdown-db" aria-expanded="false" data-toggle="collapse"><i class="la la-columns"></i><span>Table Master</span></a>
                         <ul id="dropdown-db" class="collapse list-unstyled pt-0 <?php if ($this->uri->segment(1)=='pengguna'||$this->uri->segment(1)=='provider'||$this->uri->segment(1)=='paket'||$this->uri->segment(1)=='kios'){echo 'show';}?>">
                             <li><a <?php if ($this->uri->segment(1)=='pengguna'){echo "class = 'active'";}?> href="<?= base_url("pengguna")?>">Pengguna</a></li>
                             <li><a <?php if ($this->uri->segment(1)=='provider'){echo "class = 'active'";}?> href="<?= base_url("provider")?>">Provider</a></li>
@@ -210,6 +211,8 @@ Author: SAEROX
                             <li><a <?php if ($this->uri->segment(1)=='kios'){echo "class = 'active'";}?> href="<?= base_url("kios")?>">Kios</a></li>
                         </ul>
                     </li>
+                    <?php } ?>
+                    <?php if ($this->session->userdata['pengguna_hak_akses'] == "administrator" || $this->session->userdata['pengguna_hak_akses'] == "ketua"){ ?>
                     <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Table Transaksi</span></a>
                         <ul id="dropdown-app" class="collapse list-unstyled <?php if ($this->uri->segment(1)=='transaksi'){echo 'show';}?> pt-0">
                             <li><a <?php if ($this->uri->segment(2)=='daftar'){echo "class = 'active'";}?> href="<?= base_url("transaksi/daftar/default")?>">Daftar Transaksi</a></li>
@@ -219,6 +222,20 @@ Author: SAEROX
 
                         </ul>
                     </li>
+                <?php }
+                if ($this->session->userdata['pengguna_hak_akses'] == 'karyawan'){
+                        ?>
+                    <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Laporan Penjualan</span></a>
+                        <ul id="dropdown-app" class="collapse list-unstyled <?php if ($this->uri->segment(1)=='karyawan'){echo 'show';}?> pt-0">
+                            <li><a <?php if ($this->uri->segment(2)=='debit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/debit")?>">Laporan Debit</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='kredit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/kredit")?>">Laporan Kredit</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='Riwayat'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat")?>">Riwayat Laporan</a></li>
+
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
 
                 </ul>
 

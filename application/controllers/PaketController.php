@@ -17,6 +17,7 @@ class PaketController extends GLOBAL_Controller
         if ($this->session->userdata['pengguna_id'] == null){
             redirect('login');
         }
+        parent::setRule();
     }
     public function index(){
         $data['title'] = 'Dashboard';

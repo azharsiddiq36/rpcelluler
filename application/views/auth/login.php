@@ -71,9 +71,12 @@ Author: SAEROX
                     </a>
                 </div>
                 <h3>Masuk ke Rp Celluler</h3>
+                <?php
+                if ($this->session->flashdata('msg')!= null){?>
                 <div class="auto-hide alert alert-warning" role="alert">
                     <strong>Maaf, </strong> <?= $this->session->flashdata('msg')?>
                 </div>
+                <?php } ?>
                 <form action="<?= base_url('login')?>" method="post">
                     <div class="group material-input">
                         <input type="text" name = "email" required>

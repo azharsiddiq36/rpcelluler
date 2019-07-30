@@ -12,11 +12,10 @@ class TransaksiController extends GLOBAL_Controller
     {
         parent::__construct();
         $this->load->model('TransaksiModel');
+        $this->load->model('PaketModel');
+        $this->load->model('ProviderModel');
+        $this->load->model('KiosModel');
 
-        if (parent::hasLogin())
-        {
-            redirect(site_url('login'));
-        }
     }
     public function index(){
         $data['title'] = 'Dashboard';
@@ -42,26 +41,73 @@ class TransaksiController extends GLOBAL_Controller
 
         parent::template('transaksi/index',$data);
     }
-    public function tambah(){
-        if(isset($_POST['submit'])){
-            $nama = parent::post("transaksi_nama");
-            $alamat = parent::post("transaksi_alamat");
-            $cabang = parent::post("transaksi_cabang");
+    public function tambahdebit(){
 
+            if(isset($_POST['submit'])){
+
+                $id = parent::post("paket_provider_id");
+                $param = array("paket_id"=>$id);
+                $paket = parent::model("PaketModel")->getOne($param);
+                $namapaket = parent::post("nama");
+                $providerpaket = parent::post("providerpaket");
+                $jumlah = parent::post("jumlah");
+                $total = $jumlah*$paket['paket_harga_satuan'];
+                $kios = parent::post("kios");
+                $pengguna = $this->session->userdata['pengguna_id'];
+                $stok = $paket['paket_stok']-$jumlah;
+                $data = array("paket_stok"=>$stok);
+                parent::model("PaketModel")->editPaket($id,$data);
+                $data = array(
+                    "transaksi_keterangan"=>$providerpaket." - ".$namapaket,
+                    "transaksi_jumlah"=>$jumlah,
+                    "transaksi_total"=>$total,
+                    "transaksi_paket_id"=>$id,
+                    "transaksi_jenis"=>'debit',
+                    "transaksi_kios_id"=>$kios,
+                    "transaksi_pengguna_id"=>$pengguna
+                );
+                parent::model("TransaksiModel")->post_transaksi($data);
+                parent::alert("msg","Berhasil Menambahkan Debit !!!");
+                redirect("karyawan/debit");
+
+            }
+            else{
+                $data['title'] = "Laporan Debit";
+                $data['kios'] =  parent::model("KiosModel")->get_kios()->result();
+                $data['data'] = $this->PaketModel->getJoin()->result();
+                parent::template('transaksi/tambahdebit',$data);
+            }
+
+
+    }
+    public function tambahkredit(){
+
+        if(isset($_POST['submit'])){
+            $jumlah = parent::post("jumlah");
+            $kios = parent::post("kios");
+            $pengguna = $this->session->userdata['pengguna_id'];
+            $keterangan = parent::post("keterangan");
             $data = array(
-                "transaksi_nama"=>$nama,
-                "transaksi_cabang"=>$cabang,
-                "transaksi_alamat"=>$alamat,
+                "transaksi_keterangan"=>$keterangan,
+                "transaksi_jumlah"=>1,
+                "transaksi_total"=>$jumlah,
+                "transaksi_paket_id"=>4,
+                "transaksi_jenis"=>'kredit',
+                "transaksi_kios_id"=>$kios,
+                "transaksi_pengguna_id"=>$pengguna
             );
             parent::model("TransaksiModel")->post_transaksi($data);
-            parent::alert("msg","Berhasil Menambahkan Data !!!");
-            redirect("transaksi");
+            parent::alert("msg","Berhasil Menambahkan Kredit !!!");
+            redirect("karyawan/kredit");
 
         }
         else{
-            $data['title'] = "Transaksi";
-            parent::template('transaksi/tambah',$data);
+            $data['title'] = "Laporan Kredit";
+            $data['kios'] =  parent::model("KiosModel")->get_kios()->result();
+            parent::template('transaksi/tambahkredit',$data);
         }
+
+
     }
     public function edit(){
         $id = $this->uri->segment(2);
@@ -90,9 +136,8 @@ class TransaksiController extends GLOBAL_Controller
         $sort = $this->uri->segment(2);
     }
     public function detail(){
-        $id = parent::post("transaksi_id");
-        $param = array("transaksi_id"=>$id);
-        $isi = parent::model("TransaksiModel")->getOne($param);
+        $id = parent::post("paket_id");
+        $isi = parent::model("PaketModel")->getOneJoin($id)->row_array();
         echo json_encode($isi);
     }
     public function delete(){
@@ -103,4 +148,11 @@ class TransaksiController extends GLOBAL_Controller
         parent::alert("msg","Berhasil Menghapus Data !!!");
         redirect("transaksi");
     }
+    public function riwayat(){
+        $data['title'] = "Riwayat";
+        $id = $this->session->userdata['pengguna_id'];
+        $data['data']=$this->TransaksiModel->getByUser($id)->result();
+        parent::template('transaksi/riwayat',$data);
+    }
+
 }

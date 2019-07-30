@@ -69,4 +69,13 @@
             $query = $this->db->get();
             return $query;
         }
+        public function getByUser($id){
+            $this->db->select('*');
+            $this->db->from($this->initTable());
+            $this->db->where('transaksi_pengguna_id',$id);
+            $this->db->join('tbl_paket','tbl_paket.paket_id = tbl_transaksi.transaksi_paket_id');
+            $this->db->order_by('transaksi_id','desc');
+            $query = $this->db->get();
+            return $query;
+        }
     }

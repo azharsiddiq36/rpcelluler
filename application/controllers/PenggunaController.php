@@ -12,15 +12,33 @@ class PenggunaController extends GLOBAL_Controller
     {
         parent::__construct();
         $this->load->model('PenggunaModel');
-
-        if (parent::hasLogin())
-        {
-            redirect(site_url('login'));
+        $this->load->model('KiosModel');
+        $this->load->model('PaketModel');
+        $this->load->model('ProviderModel');
+        $this->load->model('TransaksiModel');
+        if ($this->session->userdata['pengguna_id'] == null){
+            redirect('login');
         }
     }
     public function index(){
         $data['title'] = 'Dashboard';
-        parent::template('dashboard/index',$data);
+        $data['pengguna'] = parent::model('PenggunaModel')->get_pengguna()->num_rows();
+        $data['provider'] = parent::model('ProviderModel')->get_provider()->num_rows();
+        $data['paket'] = parent::model('PaketModel')->get_paket()->num_rows();
+        $data['kios'] = parent::model('KiosModel')->get_kios()->num_rows();
+        $date = date('Y-m-d');
+        $data['sekarang'] = $this->TransaksiModel->getNowJoin($date)->num_rows();
+        $date = date('m');
+        $data['bulan'] = $this->TransaksiModel->getMonthJoin($date)->num_rows();
+        $date = date('Y');
+        $data['tahun'] = $this->TransaksiModel->getYearsJoin($date)->num_rows();
+        $data['semua'] = parent::model('PenggunaModel')->get_pengguna()->num_rows();
+        switch ($this->session->userdata['pengguna_hak_akses']){
+            case "ketua":
+                parent::template('dashboard/indexketua',$data);break;
+            case "karyawan":                  parent::template('dashboard/indexkaryawan',$data);break;
+            default :        parent::template('dashboard/index',$data);
+        }
     }
     public function daftar(){
         $data['title'] = "Pengguna";

@@ -45,6 +45,7 @@ class PenggunaController extends GLOBAL_Controller
         $data['data'] = parent::model('PenggunaModel')->get_pengguna()->result();
         parent::template('pengguna/index',$data);
     }
+    //Tambah Pengguna
     public function tambah(){
         if(isset($_POST['submit'])){
             $nama = parent::post("pengguna_nama");
@@ -81,6 +82,44 @@ class PenggunaController extends GLOBAL_Controller
             $data['title'] = "Pengguna";
             parent::template('pengguna/tambah_pengguna',$data);
         }
+    }
+    public function profile(){
+        $data['title'] = "Profile Saya";
+        $param = array('pengguna_id'=>$this->session->userdata['pengguna_id']);
+        $data['data'] =  parent::model("PenggunaModel")->getOne($param);
+        if (isset($_POST['submit'])){
+            $nama = parent::post("nama");
+            $nomor = parent::post("nomor");
+            $email = parent::post("email");
+            $password = parent::post("password");
+            $alamat = parent::post("alamat");
+            $param = null;
+            if($password == $data['data']['pengguna_password']){
+                $param = array(
+                    "pengguna_nama"=>$nama,
+                    "pengguna_email" =>$email,
+                    "pengguna_nomor" => $nomor,
+                    "pengguna_alamat" =>$alamat,
+                  );
+            }
+            else{
+                $param = array(
+                    "pengguna_nama"=>$nama,
+                    "pengguna_email" =>$email,
+                    "pengguna_nomor" => $nomor,
+                    "pengguna_alamat" =>$alamat,
+                    "pengguna_password"=>md5($password)
+                );
+            }
+            parent::model("PenggunaModel")->editPengguna($this->session->userdata['pengguna_id'],$param);
+            parent::alert("msg","Berhasil Merubah Profile");
+            redirect('profile');
+
+        }
+        else{
+            parent::template('pengguna/profile',$data);
+        }
+
     }
     public function edit(){
         $id = $this->uri->segment(2);

@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 	//PenggunaController
+    $route['profile'] = 'PenggunaController/profile';
 	$route['dashboard'] = 'PenggunaController';
     $route['pengguna'] = 'PenggunaController/daftar';
     $route['tambah_pengguna'] = 'PenggunaController/tambah';

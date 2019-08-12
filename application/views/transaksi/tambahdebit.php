@@ -13,7 +13,7 @@
                 <h2 class="page-header-title"><?= $title?></h2>
                 <div>
                     <div class="page-header-tools">
-                        <a class="btn btn-gradient-01" href="<?= base_url("tambah_paket")?>">Daftar Code Paket</a>
+                        <a class="btn btn-gradient-01" href="" data-target = "#modal_pengguna" data-toggle="modal">Daftar Code Paket</a>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,9 @@
                                             <select id="code-paket2" name="paket_provider_id" class="custom-select form-control" required>
                                                 <option value="0">--Code--</option>
                                                 <?php foreach ($data as $key):
+                                                    if ($key->paket_id == 4){
+                                                    continue;
+                                                    }
                                                     ?>
                                                     <option value="<?= $key->paket_id?>"><?= substr($key->provider_nama,0,2)."-".$key->paket_id?></option>
                                                 <?php
@@ -108,6 +111,58 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal_pengguna" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Daftar Kode Paket</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body"><div class="table-responsive">
+                            <table id="sorting-table" class="table mb-0">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Code Paket</th>
+                                    <th>Nama Paket</th>
+                                    <th>Provider</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $no = 1;
+                                foreach ($data as $key){
+                                    if ($key->paket_id == 4){
+                                        continue;
+                                    }?>
+
+                                    <tr>
+                                        <td><span class="text-primary"><?= $no++?></span></td>
+                                        <td><?= substr($key->provider_nama,0,2)."-".$key->paket_id?></td>
+                                        <td><?= $key->paket_nama?></td>
+                                        <td><?= $key->provider_nama?></td>
+
+                                    </tr>
+                                <?php }?>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="percobaan"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
         </div>

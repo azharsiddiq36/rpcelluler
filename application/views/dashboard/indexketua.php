@@ -13,7 +13,7 @@
                 <div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/history.png" width="50px" height="50px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Semua Transaksi</div>
@@ -29,7 +29,7 @@
                 <div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/history.png" width="50px" height="50px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Transaksi Hari Ini</div>
@@ -44,7 +44,7 @@
                 <a href="<?= base_url("transaksi/bulan/default")?>"><div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/history.png" width="40px" height="40px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Transaksi Bulan Ini</div>
@@ -59,7 +59,7 @@
                 <a href="<?= base_url("transaksi/tahun/default")?>"><div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/history.png" width="50px" height="50px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Transaksi Tahun Ini</div>

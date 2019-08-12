@@ -36,7 +36,8 @@
                         'pengguna_email' => $existsData['pengguna_email'],
                         'pengguna_id' => $existsData['pengguna_id'],
 						'pengguna_nama' => $existsData['pengguna_nama'],
-						'pengguna_hak_akses' => $existsData['pengguna_hak_akses']
+						'pengguna_hak_akses' => $existsData['pengguna_hak_akses'],
+                        'pengguna_status' => $existsData['pengguna_status']
 					);
                     $this->session->set_userdata($sessData);
 					if ($existsData['pengguna_hak_akses'] == "administrator" ||

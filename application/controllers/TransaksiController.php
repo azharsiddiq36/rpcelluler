@@ -134,6 +134,11 @@ class TransaksiController extends GLOBAL_Controller
     }
     public function listTransaksi(){
         $sort = $this->uri->segment(2);
+        for ($i = 0;$i<$sort;$i++){
+            if ($i == $sort%2){
+                continue;
+            }
+        }
     }
     public function detail(){
         $id = parent::post("paket_id");

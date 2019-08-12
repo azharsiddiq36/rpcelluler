@@ -13,7 +13,7 @@
                 <a href="<?= base_url("karyawan/debit")?>"><div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/profits.png" width="50px" height="50px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Debit</div>
@@ -28,7 +28,7 @@
             <a href="<?= base_url("karyawan/kredit")?>"><div class="widget-body">
                     <div class="media">
                         <div class="align-self-center ml-5 mr-5">
-                            <i class="ion-social-facebook text-facebook"></i>
+                            <img src="<?= base_url()?>assets/img/loss.png" width="50px" height="50px" >
                         </div>
                         <div class="media-body align-self-center">
                             <div class="title text-facebook">Kredit</div>

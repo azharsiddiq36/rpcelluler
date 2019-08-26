@@ -159,5 +159,10 @@ class TransaksiController extends GLOBAL_Controller
         $data['data']=$this->TransaksiModel->getByUser($id)->result();
         parent::template('transaksi/riwayat',$data);
     }
-
+    public function cetak(){
+        $data['title'] = "Riwayat";
+        $id = $this->session->userdata['pengguna_id'];
+        $data['data']=$this->TransaksiModel->getByUser($id)->result();
+        parent::template('transaksi/cetakmasuk',$data);
+    }
 }

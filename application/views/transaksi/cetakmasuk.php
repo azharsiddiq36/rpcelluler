@@ -8,16 +8,27 @@
         <?php
     }?>
     <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title"><?= $title?></h2>
+                <div>
+                    <div class="page-header-tools">
+                        <button class="btn btn-gradient-01" href="" onclick="printContent('oke')">Cetak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-12">
             <!-- Sorting -->
-            <div class="widget has-shadow">
+
+            <div class="widget has-shadow" id="oke">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
-                    <h4>Tabel Riwayat</h4>
+                    <h4>Tabel Pemasukan</h4>
                 </div>
-                <div class="widget-body" id="oke">
+                <div class="widget-body">
                     <div class="table-responsive">
-                        <table id="sorting-table" class="table mb-0">
+                        <table class="table mb-0">
                             <thead>
                             <tr>
                                 <th>No</th>
@@ -32,9 +43,12 @@
                             <tbody>
 
                             <?php
+                            $totaldebit= 0;
+                            $totalkredit= 0;
                             $no = 1;
                             foreach ($data as $key) {
                                 if ($key->transaksi_jenis == 'debit' && $this->uri->segment(3)=='masuk' ){
+                                    $totaldebit+= $key->transaksi_total;
                                     ?>
                                     <tr>
                                         <td><span class="text-primary"><?= $no++ ?></span></td>
@@ -47,6 +61,7 @@
                                     </tr>
                                 <?php }
                                 else if( $key->transaksi_jenis == 'kredit' && $this->uri->segment(3)=='keluar' ){
+                                    $totalkredit += $key->transaksi_total;
                                     ?>
                                     <tr>
                                         <td><span class="text-primary"><?= $no++ ?></span></td>
@@ -61,8 +76,16 @@
                                 }
 
                             }?>
-
-
+                            <tr><td colspan="5"></td>
+                                <td >Total Keseluruhan</td>
+                                <td>Rp. <?php
+                                    if ($this->uri->segment(3)=='debit'){
+                                        echo $totaldebit;
+                                    }
+                                    else{
+                                        echo $totalkredit;
+                                    }
+                                    ?></td></tr>
                             </tbody>
                         </table>
                     </div>

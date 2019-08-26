@@ -133,11 +133,11 @@ Author: SAEROX
                 <?php }
                 if ($this->session->userdata['pengguna_hak_akses'] == 'karyawan'){
                         ?>
-                    <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Laporan Penjualan</span></a>
+                    <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Data Penjualan</span></a>
                         <ul id="dropdown-app" class="collapse list-unstyled <?php if ($this->uri->segment(1)=='karyawan'){echo 'show';}?> pt-0">
-                            <li><a <?php if ($this->uri->segment(2)=='debit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/debit")?>">Laporan Debit</a></li>
-                            <li><a <?php if ($this->uri->segment(2)=='kredit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/kredit")?>">Laporan Kredit</a></li>
-                            <li><a <?php if ($this->uri->segment(2)=='Riwayat'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat")?>">Riwayat Laporan</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='debit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/debit")?>">Data Penjualan</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='kredit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/kredit")?>">Data Pengeluaran</a></li>
+                            <li><a <?php if ($this->uri->segment(2)=='Riwayat'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat")?>">Riwayat Penjualan</a></li>
 
                         </ul>
                     </li>

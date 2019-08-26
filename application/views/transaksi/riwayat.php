@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-xl-12">
             <!-- Sorting -->
-            <div class="widget has-shadow">
+            <div id="print" class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
                     <h4>Tabel Pengguna</h4>
                 </div>

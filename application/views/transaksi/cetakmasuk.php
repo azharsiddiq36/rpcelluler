@@ -7,6 +7,9 @@
         </div>
         <?php
     }?>
+
+
+
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
@@ -20,6 +23,59 @@
         </div>
 
         <div class="col-xl-12">
+            <div class="row flex-row">
+                <div class="col-xl-12 col-md-6">
+
+                    <div class="widget widget-09 has-shadow">
+
+                        <div class="widget-header bordered no-actions d-flex align-items-center">
+                            <h4>Select Tanggal</h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="row">
+                                <div class="col-xl-10 col-12 no-padding">
+                                    <?php
+                                        if ($this->uri->segment(3)=='masuk'){
+                                            ?>
+                                    <form class="needs-validation" action="<?= base_url("administrator/riwayat/masuk/cetak")?>" method="post" novalidate>
+                                    <?php
+                                        }
+                                        else{
+                                            ?>
+                                        <form class="needs-validation" action="<?= base_url("administrator/riwayat/keluar/cetak")?>" method="post" novalidate>
+                                        <?php
+                                        }
+                                    ?>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end"></label>
+                                            <div class="col-sm-10">
+                                                <div class="row">
+                                                        <label class="col-lg-2">Mulai</label>
+                                                    <div class="col-lg-3">
+                                                        <input type="date" required name="mulai" class="form-control">
+                                                    </div>
+
+                                                        <label class = "col-lg-2">Selesai</label>
+
+                                                    <div class="col-lg-3">
+                                                        <input type="date" required name="selesai" class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <button class="btn btn-gradient-04" name = "submit" type="submit">Select</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <!-- Sorting -->
 
             <div class="widget has-shadow" id="oke">
@@ -79,7 +135,7 @@
                             <tr><td colspan="5"></td>
                                 <td >Total Keseluruhan</td>
                                 <td>Rp. <?php
-                                    if ($this->uri->segment(3)=='debit'){
+                                    if ($this->uri->segment(3)=='masuk'){
                                         echo $totaldebit;
                                     }
                                     else{

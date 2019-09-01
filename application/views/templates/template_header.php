@@ -127,7 +127,8 @@ Author: SAEROX
                                 <li><a <?php if ($this->uri->segment(2)=='sekarang'){echo "class = 'active'";}?> href="<?= base_url("transaksi/sekarang/default")?>">Hari ini</a></li>
                                 <li><a <?php if ($this->uri->segment(2)=='bulan'){echo "class = 'active'";}?> href="<?= base_url("transaksi/bulan/default")?>">Bulan ini</a></li>
                                 <li><a <?php if ($this->uri->segment(2)=='tahun'){echo "class = 'active'";}?> href="<?= base_url("transaksi/tahun/default")?>">Tahun ini</a></li>
-
+                                <li><a <?php if ($this->uri->segment(4)=='cetak' && $this->uri->segment(3)=='masuk'){echo "class = 'active'";}?> href="<?= base_url("administrator/riwayat/masuk/cetak")?>">Cetak Pemasukan</a></li>
+                                <li><a <?php if ($this->uri->segment(4)=='cetak'&& $this->uri->segment(3)=='keluar'){echo "class = 'active'";}?> href="<?= base_url("administrator/riwayat/keluar/cetak")?>">Cetak Pengeluaran</a></li>
                             </ul>
                         </li>
                     <?php }
@@ -139,8 +140,7 @@ Author: SAEROX
                                 <li><a <?php if ($this->uri->segment(2)=='kredit'){echo "class = 'active'";}?> href="<?= base_url("karyawan/kredit")?>">Tambah Pengeluaran</a></li>
                                 <li><a <?php if ($this->uri->segment(3)=='masuk' && $this->uri->segment(4)!='cetak' ){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat/masuk")?>">Riwayat Pemasukan</a></li>
                                 <li><a <?php if ($this->uri->segment(3)=='keluar' && $this->uri->segment(4)!='cetak'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat/keluar")?>">Riwayat Pengeluaran</a></li>
-                                <li><a <?php if ($this->uri->segment(4)=='cetak' && $this->uri->segment(3)=='masuk'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat/masuk/cetak")?>">Cetak Pemasukan</a></li>
-                                <li><a <?php if ($this->uri->segment(4)=='cetak'&& $this->uri->segment(3)=='keluar'){echo "class = 'active'";}?> href="<?= base_url("karyawan/riwayat/keluar/cetak")?>">Cetak Pengeluaran</a></li>
+
                             </ul>
                         </li>
                         <?php

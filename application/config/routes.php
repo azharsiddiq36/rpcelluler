@@ -37,8 +37,8 @@ $route['karyawan/debit'] = 'TransaksiController/tambahdebit';
 $route['karyawan/kredit'] = 'TransaksiController/tambahkredit';
 $route['karyawan/riwayat/masuk'] = 'TransaksiController/riwayat';
 $route['karyawan/riwayat/keluar'] = 'TransaksiController/riwayat';
-$route['karyawan/riwayat/masuk/cetak'] = 'TransaksiController/cetak';
-$route['karyawan/riwayat/keluar/cetak'] = 'TransaksiController/cetak';
+$route['administrator/riwayat/masuk/cetak'] = 'TransaksiController/cetak';
+$route['administrator/riwayat/keluar/cetak'] = 'TransaksiController/cetak';
 $route['detail_paket_karyawan'] = 'TransaksiController/detail';
 // authentication
 $route['logout'] = 'AuthController/logout';

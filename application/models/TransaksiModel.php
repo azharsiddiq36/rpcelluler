@@ -36,6 +36,19 @@
             $query = $this->db->get();
             return $query;
         }
+        public function getAllJoinDate($mulai,$selesai){
+            $this->db->select('*');
+            $this->db->from($this->initTable());
+            $this->db->join('tbl_paket', 'tbl_paket.paket_id = tbl_transaksi.transaksi_paket_id');
+            $this->db->join('tbl_kios', 'tbl_kios.kios_id = tbl_transaksi.transaksi_kios_id');
+            $this->db->join('tbl_pengguna', 'tbl_pengguna.pengguna_id = tbl_transaksi.transaksi_pengguna_id');
+            $this->db->join('tbl_provider', 'tbl_provider.provider_id = tbl_paket.paket_provider_id');
+            $this->db->order_by('transaksi_id',"desc");
+            $this->db->where('transaksi_waktu >= "'.$mulai.'"');
+            $this->db->where('transaksi_waktu <= "'.$selesai.'"');
+            $query = $this->db->get();
+            return $query;
+        }
         public function getNowJoin($date){
             $this->db->select('*');
             $this->db->from($this->initTable());

@@ -10,6 +10,53 @@
 
     <div class="row">
         <div class="col-xl-12">
+            <div class="row flex-row">
+                <div class="col-xl-12 col-md-6">
+
+                    <div class="widget widget-09 has-shadow">
+
+                        <div class="widget-header bordered no-actions d-flex align-items-center">
+                            <h4>Select Tanggal</h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="row">
+                                <div class="col-xl-10 col-12 no-padding">
+
+                                    <form class="needs-validation" action="<?= base_url("transaksi/".$this->uri->segment(2)."/".$this->uri->segment(3))?>" method="post" novalidate>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 form-control-label d-flex justify-content-lg-end"></label>
+                                                <div class="col-sm-10">
+                                                    <div class="row">
+                                                        <label class="col-lg-2">Pilih Kios</label>
+                                                        <div class="select col-lg-4">
+                                                            <select name="kios" class="custom-select form-control" required>
+                                                                <option value="">Pilih Kios</option>
+                                                                <?php foreach ($kios as $key):
+                                                                    ?>
+                                                                    <option value="<?= $key->kios_id?>"><?= $key->kios_nama?></option>
+                                                                <?php
+                                                                endforeach;
+                                                                ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select an option
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <button class="btn btn-gradient-04" name = "submit" type="submit">Select</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <!-- Sorting -->
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
@@ -51,25 +98,56 @@
                                     $debit = 0;
                                     $kredit = 0;
                                     foreach ($data as $key){
-                                        if ($key->transaksi_jenis == "kredit"){
-                                            $kredit += $key->transaksi_total;
+
+                                        if ($select == null){
+                                            if ($key->transaksi_jenis == "kredit"){
+                                                $kredit += $key->transaksi_total;
+                                            }
+                                            else{
+                                                $debit += $key->transaksi_total;
+                                            }
+                                            ?>
+                                            <tr>
+                                                <td><span class="text-primary"><?= $no++?></span></td>
+                                                <td><?= $key->pengguna_nama?></td>
+                                                <td><?= $key->kios_nama?></td>
+                                                <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                <td><?= $key->transaksi_jumlah?></td>
+                                                <td><?= $key->transaksi_total?></td>
+                                                <td><?= $key->transaksi_jenis?></td>
+                                                <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                <td><?= $key->transaksi_keterangan?></td>
+                                            </tr>
+                                            <?php
                                         }
                                         else{
-                                            $debit += $key->transaksi_total;
+                                            if ($key->kios_id == $select){
+                                                if ($key->transaksi_jenis == "kredit"){
+                                                    $kredit += $key->transaksi_total;
+                                                }
+                                                else{
+                                                    $debit += $key->transaksi_total;
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++?></span></td>
+                                                    <td><?= $key->pengguna_nama?></td>
+                                                    <td><?= $key->kios_nama?></td>
+                                                    <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                    <td><?= $key->transaksi_jumlah?></td>
+                                                    <td><?= $key->transaksi_total?></td>
+                                                    <td><?= $key->transaksi_jenis?></td>
+                                                    <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                    <td><?= $key->transaksi_keterangan?></td>
+                                                </tr>
+                                                <?php
+                                            }?>
+
+                                            <?php
                                         }
                                         ?>
 
-                                        <tr>
-                                            <td><span class="text-primary"><?= $no++?></span></td>
-                                            <td><?= $key->pengguna_nama?></td>
-                                            <td><?= $key->kios_nama?></td>
-                                            <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
-                                            <td><?= $key->transaksi_jumlah?></td>
-                                            <td><?= $key->transaksi_total?></td>
-                                            <td><?= $key->transaksi_jenis?></td>
-                                            <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
-                                            <td><?= $key->transaksi_keterangan?></td>
-                                        </tr>
+
                                     <?php }?>
 
 
@@ -101,23 +179,46 @@
                                     $no = 1;
                                     $debit = 0;
                                     foreach ($data as $key){
-                                        if($key->transaksi_jenis == "debit"){
-                                            $debit += $key->transaksi_total;
-                                        ?>
+                                        if($select == null){
+                                            if($key->transaksi_jenis == "debit"){
+                                                $debit += $key->transaksi_total;
+                                                ?>
 
-                                        <tr>
-                                            <td><span class="text-primary"><?= $no++?></span></td>
-                                            <td><?= $key->pengguna_nama?></td>
-                                            <td><?= $key->kios_nama?></td>
-                                            <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
-                                            <td><?= $key->transaksi_jumlah?></td>
-                                            <td><?= $key->transaksi_total?></td>
-                                            <td><?= $key->transaksi_jenis?></td>
-                                            <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
-                                            <td><?= $key->transaksi_keterangan?></td>
-                                        </tr>
-                                    <?php
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++?></span></td>
+                                                    <td><?= $key->pengguna_nama?></td>
+                                                    <td><?= $key->kios_nama?></td>
+                                                    <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                    <td><?= $key->transaksi_jumlah?></td>
+                                                    <td><?= $key->transaksi_total?></td>
+                                                    <td><?= 'pemasukan'?></td>
+                                                    <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                    <td><?= $key->transaksi_keterangan?></td>
+                                                </tr>
+                                                <?php
+                                            }
                                         }
+                                        else{
+                                            if($select == $key->kios_id){
+                                                if ($key->transaksi_jenis == 'debit'){
+                                                ?>
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++?></span></td>
+                                                    <td><?= $key->pengguna_nama?></td>
+                                                    <td><?= $key->kios_nama?></td>
+                                                    <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                    <td><?= $key->transaksi_jumlah?></td>
+                                                    <td><?= $key->transaksi_total?></td>
+                                                    <td><?= 'Pemasukan'?></td>
+                                                    <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                    <td><?= $key->transaksi_keterangan?></td>
+                                                </tr>
+
+                                    <?php
+                                                }
+                                            }
+                                        }
+
                                     }?>
 
 
@@ -148,22 +249,45 @@
                                     $no = 1;
                                     $kredit = 0;
                                     foreach ($data as $key){
-                                        if($key->transaksi_jenis == "kredit"){
-                                            $kredit += $key->transaksi_total;
-                                            ?>
-                                            <tr>
-                                                <td><span class="text-primary"><?= $no++?></span></td>
-                                                <td><?= $key->pengguna_nama?></td>
-                                                <td><?= $key->kios_nama?></td>
-                                                <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
-                                                <td><?= $key->transaksi_jumlah?></td>
-                                                <td><?= $key->transaksi_total?></td>
-                                                <td><?= $key->transaksi_jenis?></td>
-                                                <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
-                                                <td><?= $key->transaksi_keterangan?></td>
-                                            </tr>
-                                            <?php
+                                        if ($select == null){
+                                            if($key->transaksi_jenis == "kredit"){
+                                                $kredit += $key->transaksi_total;
+                                                ?>
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++?></span></td>
+                                                    <td><?= $key->pengguna_nama?></td>
+                                                    <td><?= $key->kios_nama?></td>
+                                                    <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                    <td><?= $key->transaksi_jumlah?></td>
+                                                    <td><?= $key->transaksi_total?></td>
+                                                    <td><?= 'pengeluaran'?></td>
+                                                    <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                    <td><?= $key->transaksi_keterangan?></td>
+                                                </tr>
+                                                <?php
+                                            }
                                         }
+                                        else{
+                                            if ($select == $key->kios_id){
+                                                if($key->transaksi_jenis == "kredit"){
+                                                    $kredit += $key->transaksi_total;
+                                                    ?>
+                                                    <tr>
+                                                        <td><span class="text-primary"><?= $no++?></span></td>
+                                                        <td><?= $key->pengguna_nama?></td>
+                                                        <td><?= $key->kios_nama?></td>
+                                                        <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
+                                                        <td><?= $key->transaksi_jumlah?></td>
+                                                        <td><?= $key->transaksi_total?></td>
+                                                        <td><?= 'pengeluaran'?></td>
+                                                        <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
+                                                        <td><?= $key->transaksi_keterangan?></td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+
                                     }?>
 
 

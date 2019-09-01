@@ -25,6 +25,11 @@ class TransaksiController extends GLOBAL_Controller
         $data['title'] = "Transaksi";
         $sort = $this->uri->segment(2);
         $type = $this->uri->segment(3);
+        $data['select'] = null;
+        if (isset($_POST['submit'])){
+            $kios = parent::post('kios');
+            $data['select'] = $kios;
+        }
         $data['data'] = null;
         switch ($sort){
             case 'sekarang':
@@ -39,6 +44,7 @@ class TransaksiController extends GLOBAL_Controller
             default:$data['data'] = parent::model('TransaksiModel')->getAllJoin()->result();break;
         }
 
+        $data['kios'] = parent::model('KiosModel')->get_kios()->result();
         parent::template('transaksi/index',$data);
     }
     public function tambahdebit(){
@@ -132,14 +138,6 @@ class TransaksiController extends GLOBAL_Controller
             parent::template('transaksi/edit',$data);
         }
     }
-    public function listTransaksi(){
-        $sort = $this->uri->segment(2);
-        for ($i = 0;$i<$sort;$i++){
-            if ($i == $sort%2){
-                continue;
-            }
-        }
-    }
     public function detail(){
         $id = parent::post("paket_id");
         $isi = parent::model("PaketModel")->getOneJoin($id)->row_array();
@@ -156,13 +154,26 @@ class TransaksiController extends GLOBAL_Controller
     public function riwayat(){
         $data['title'] = "Riwayat";
         $id = $this->session->userdata['pengguna_id'];
+//        $data['data']=$this->TransaksiModel->getAllJoin()->result();
         $data['data']=$this->TransaksiModel->getByUser($id)->result();
+//        $data['data']=$this->TransaksiModel->getByUser($id)->result();
         parent::template('transaksi/riwayat',$data);
     }
     public function cetak(){
         $data['title'] = "Riwayat";
         $id = $this->session->userdata['pengguna_id'];
-        $data['data']=$this->TransaksiModel->getByUser($id)->result();
-        parent::template('transaksi/cetakmasuk',$data);
+        if(isset($_POST['submit'])){
+            $tglmulai = parent::post('mulai');
+            $tglselesai = parent::post('selesai');
+            $data['data'] = $this->TransaksiModel->getAllJoinDate($tglmulai,$tglselesai)->result();
+
+            parent::template('transaksi/cetakmasuk',$data);
+        }
+        else{
+
+            $data['data']=$this->TransaksiModel->getAllJoin()->result();
+            parent::template('transaksi/cetakmasuk',$data);
+        }
+
     }
 }

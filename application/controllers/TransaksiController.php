@@ -165,7 +165,13 @@ class TransaksiController extends GLOBAL_Controller
         if(isset($_POST['submit'])){
             $tglmulai = parent::post('mulai');
             $tglselesai = parent::post('selesai');
-            $data['data'] = $this->TransaksiModel->getAllJoinDate($tglmulai,$tglselesai)->result();
+            if ($tglmulai==$tglselesai){
+                $data['data'] = $this->TransaksiModel->getNowJoin($tglmulai)->result();
+            }
+            else{
+                $data['data'] = $this->TransaksiModel->getAllJoinDate($tglmulai,$tglselesai)->result();
+            }
+
 
             parent::template('transaksi/cetakmasuk',$data);
         }

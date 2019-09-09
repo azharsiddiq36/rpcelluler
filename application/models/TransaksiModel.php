@@ -44,8 +44,7 @@
             $this->db->join('tbl_pengguna', 'tbl_pengguna.pengguna_id = tbl_transaksi.transaksi_pengguna_id');
             $this->db->join('tbl_provider', 'tbl_provider.provider_id = tbl_paket.paket_provider_id');
             $this->db->order_by('transaksi_id',"desc");
-            $this->db->where('transaksi_waktu >= "'.$mulai.'"');
-            $this->db->where('transaksi_waktu <= "'.$selesai.'"');
+            $this->db->where('transaksi_waktu BETWEEN "'. date('Y-m-d', strtotime($mulai)). '" and "'. date('Y-m-d', strtotime($selesai)).'"');
             $query = $this->db->get();
             return $query;
         }

@@ -16,14 +16,25 @@ $route['tambah_provider'] = 'ProviderController/tambah';
 $route['edit_provider/(:any)'] = 'ProviderController/edit/$1';
 $route['delete_provider/(:any)'] = 'ProviderController/delete/$1';
 $route['detail_provider'] = 'ProviderController/detail';
-
+//Cabang
+$route['cabang'] = 'CabangController/daftar';
+$route['tambah_cabang'] = 'CabangController/tambah';
+$route['edit_cabang/(:any)'] = 'CabangController/edit/$1';
+$route['delete_cabang/(:any)'] = 'CabangController/delete/$1';
+$route['detail_cabang'] = 'CabangController/detail';
 //Kios
 $route['kios'] = 'KiosController/daftar';
 $route['tambah_kios'] = 'KiosController/tambah';
 $route['edit_kios/(:any)'] = 'KiosController/edit/$1';
 $route['delete_kios/(:any)'] = 'KiosController/delete/$1';
 $route['detail_kios'] = 'KiosController/detail';
-
+//Pulsa
+$route['pulsa'] = 'PulsaController/daftar';
+$route['tambah_pulsa'] = 'PulsaController/tambah';
+$route['edit_pulsa/(:any)'] = 'PulsaController/edit/$1';
+$route['update_stok'] = 'PulsaController/update_stok';
+$route['delete_pulsa/(:any)'] = 'PulsaController/delete/$1';
+$route['detail_pulsa'] = 'PulsaController/detail';
 //Paket
 $route['paket'] = 'PaketController/daftar';
 $route['tambah_paket'] = 'PaketController/tambah';
@@ -46,4 +57,5 @@ $route['login'] = 'AuthController/login';
 $route['default_controller'] = 'AuthController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
 

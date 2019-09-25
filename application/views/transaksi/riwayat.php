@@ -27,6 +27,7 @@
                                 <th>Total</th>
                                 <th>Waktu</th>
                                 <th>Jenis</th>
+                                <th>Transaksi</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,6 +45,7 @@
                                         <td><?= $key->transaksi_total ?></td>
                                         <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
                                         <td>Pemasukan</td>
+                                        <td><?= $key->transaksi_pilihan?></td>
                                     </tr>
                                 <?php }
                                 else if( $key->transaksi_jenis == 'kredit' && $this->uri->segment(3)=='keluar' ){
@@ -56,6 +58,7 @@
                                         <td><?= $key->transaksi_total ?></td>
                                         <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
                                         <td>Pengeluaran</td>
+                                        <td><?= $key->transaksi_pilihan?></td>
                                     </tr>
                             <?php
                                 }

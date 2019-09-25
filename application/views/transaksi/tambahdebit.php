@@ -74,6 +74,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group row d-flex align-items-center mb-5">
+                                    <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Jenis</label>
+                                    <div class="col-lg-5">
+                                        <div class="select">
+                                            <select id="code-paket2" name="jenis" class="custom-select form-control" required>
+                                                <option value="0">--Pilih--</option>
+                                                    <option value="pulsa">Pulsa</option>
+                                                <option value="paket">Paket</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select an option
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row d-flex align-items-center mb-5">
                                     <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Jumlah</label>
                                     <div class="col-lg-5">
                                         <input id="provider2" type="number" name = "jumlah" required placeholder="Jumlah" class="form-control">
@@ -93,7 +108,7 @@
                                                     continue;
                                                     }
                                                     ?>
-                                                    <option value="<?= $key->kios_id?>"><?=$key->kios_nama?></option>
+                                                    <option value="<?= $key->kios_id?>"><?=$key->kios_nama."(".$key->kios_cabang.")"?></option>
                                                 <?php
                                                 endforeach;
                                                 ?>

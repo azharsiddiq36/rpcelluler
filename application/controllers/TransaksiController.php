@@ -29,6 +29,8 @@ class TransaksiController extends GLOBAL_Controller
         if (isset($_POST['submit'])){
             $kios = parent::post('kios');
             $data['select'] = $kios;
+            $data['kios_param'] = null;
+            $data['transaksi_param'] = null;
         }
         $data['data'] = null;
         switch ($sort){
@@ -57,6 +59,7 @@ class TransaksiController extends GLOBAL_Controller
                 $namapaket = parent::post("nama");
                 $providerpaket = parent::post("providerpaket");
                 $jumlah = parent::post("jumlah");
+                $jenis = parent::post("jenis");
                 $total = $jumlah*$paket['paket_harga_satuan'];
                 $kios = parent::post("kios");
                 $pengguna = $this->session->userdata['pengguna_id'];
@@ -67,6 +70,7 @@ class TransaksiController extends GLOBAL_Controller
                     "transaksi_keterangan"=>$providerpaket." - ".$namapaket,
                     "transaksi_jumlah"=>$jumlah,
                     "transaksi_total"=>$total,
+                    "transaksi_pilihan"=>$jenis,
                     "transaksi_paket_id"=>$id,
                     "transaksi_jenis"=>'debit',
                     "transaksi_kios_id"=>$kios,
@@ -90,6 +94,7 @@ class TransaksiController extends GLOBAL_Controller
 
         if(isset($_POST['submit'])){
             $jumlah = parent::post("jumlah");
+            $jenis = parent::post("jenis");
             $kios = parent::post("kios");
             $pengguna = $this->session->userdata['pengguna_id'];
             $keterangan = parent::post("keterangan");
@@ -97,6 +102,7 @@ class TransaksiController extends GLOBAL_Controller
                 "transaksi_keterangan"=>$keterangan,
                 "transaksi_jumlah"=>1,
                 "transaksi_total"=>$jumlah,
+                "transaksi_pilihan"=>$jenis,
                 "transaksi_paket_id"=>4,
                 "transaksi_jenis"=>'kredit',
                 "transaksi_kios_id"=>$kios,
@@ -157,6 +163,8 @@ class TransaksiController extends GLOBAL_Controller
 //        $data['data']=$this->TransaksiModel->getAllJoin()->result();
         $data['data']=$this->TransaksiModel->getByUser($id)->result();
 //        $data['data']=$this->TransaksiModel->getByUser($id)->result();
+        $data['kios'] = parent::model('KiosModel')->get_kios()->result();
+
         parent::template('transaksi/riwayat',$data);
     }
     public function cetak(){
@@ -165,18 +173,23 @@ class TransaksiController extends GLOBAL_Controller
         if(isset($_POST['submit'])){
             $tglmulai = parent::post('mulai');
             $tglselesai = parent::post('selesai');
+            $kios = parent::post('kios');
+            $transaksi = parent::post('transaksi');
             if ($tglmulai==$tglselesai){
                 $data['data'] = $this->TransaksiModel->getNowJoin($tglmulai)->result();
             }
             else{
                 $data['data'] = $this->TransaksiModel->getAllJoinDate($tglmulai,$tglselesai)->result();
             }
-
-
+            $data['kios_param'] = $kios;
+            $data['transaksi_param'] = $transaksi;
+            $data['kios'] = parent::model('KiosModel')->get_kios()->result();
             parent::template('transaksi/cetakmasuk',$data);
         }
         else{
-
+            $data['kios_param'] = null;
+            $data['transaksi_param'] = null;
+            $data['kios'] = parent::model('KiosModel')->get_kios()->result();
             $data['data']=$this->TransaksiModel->getAllJoin()->result();
             parent::template('transaksi/cetakmasuk',$data);
         }

@@ -114,7 +114,7 @@ Author: SAEROX
                         <li><a href="#dropdown-db" aria-expanded="false" data-toggle="collapse"><i class="la la-columns"></i><span>Table Master</span></a>
                             <ul id="dropdown-db" class="collapse list-unstyled pt-0 <?php if ($this->uri->segment(1)=='pengguna'||$this->uri->segment(1)=='provider'||$this->uri->segment(1)=='paket'||$this->uri->segment(1)=='kios'){echo 'show';}?>">
                                 <li><a <?php if ($this->uri->segment(1)=='pengguna'){echo "class = 'active'";}?> href="<?= base_url("pengguna")?>">Karyawan</a></li>
-                                <li><a <?php if ($this->uri->segment(1)=='provider'){echo "class = 'active'";}?> href="<?= base_url("provider")?>">Pulsa</a></li>
+                                <li><a <?php if ($this->uri->segment(1)=='provider'){echo "class = 'active'";}?> href="<?= base_url("provider")?>">Provider</a></li>
                                 <li><a <?php if ($this->uri->segment(1)=='paket'){echo "class = 'active'";}?> href="<?= base_url("paket")?>">Paket</a></li>
                                 <li><a <?php if ($this->uri->segment(1)=='kios'){echo "class = 'active'";}?> href="<?= base_url("kios")?>">Kios</a></li>
                             </ul>

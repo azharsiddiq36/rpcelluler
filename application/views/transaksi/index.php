@@ -114,7 +114,7 @@
                                                 <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                 <td><?= $key->transaksi_jumlah?></td>
                                                 <td><?= $key->transaksi_total?></td>
-                                                <td><?= $key->transaksi_jenis?></td>
+                                                <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                 <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                 <td><?= $key->transaksi_keterangan?></td>
                                             </tr>
@@ -136,7 +136,7 @@
                                                     <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                     <td><?= $key->transaksi_jumlah?></td>
                                                     <td><?= $key->transaksi_total?></td>
-                                                    <td><?= $key->transaksi_jenis?></td>
+                                                    <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                     <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                     <td><?= $key->transaksi_keterangan?></td>
                                                 </tr>
@@ -191,7 +191,7 @@
                                                     <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                     <td><?= $key->transaksi_jumlah?></td>
                                                     <td><?= $key->transaksi_total?></td>
-                                                    <td><?= 'pemasukan'?></td>
+                                                    <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                     <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                     <td><?= $key->transaksi_keterangan?></td>
                                                 </tr>
@@ -209,7 +209,7 @@
                                                     <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                     <td><?= $key->transaksi_jumlah?></td>
                                                     <td><?= $key->transaksi_total?></td>
-                                                    <td><?= 'Pemasukan'?></td>
+                                                    <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                     <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                     <td><?= $key->transaksi_keterangan?></td>
                                                 </tr>
@@ -260,7 +260,7 @@
                                                     <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                     <td><?= $key->transaksi_jumlah?></td>
                                                     <td><?= $key->transaksi_total?></td>
-                                                    <td><?= 'pengeluaran'?></td>
+                                                    <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                     <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                     <td><?= $key->transaksi_keterangan?></td>
                                                 </tr>
@@ -279,7 +279,7 @@
                                                         <td><?= $key->provider_nama." - ".$key->paket_nama?></td>
                                                         <td><?= $key->transaksi_jumlah?></td>
                                                         <td><?= $key->transaksi_total?></td>
-                                                        <td><?= 'pengeluaran'?></td>
+                                                        <td><?php if ($key->transaksi_jenis=='debit'){echo 'pemasukan';}else{ echo 'pengeluaran';}?></td>
                                                         <td><?= date_indo(date("Y-m-d",strtotime($key->transaksi_waktu)))?></td>
                                                         <td><?= $key->transaksi_keterangan?></td>
                                                     </tr>

@@ -29,7 +29,7 @@
                     <div class="widget widget-09 has-shadow">
 
                         <div class="widget-header bordered no-actions d-flex align-items-center">
-                            <h4>Select Tanggal</h4>
+                            <h4>Select</h4>
                         </div>
 
                         <div class="widget-body">
@@ -62,12 +62,58 @@
                                                     <div class="col-lg-3">
                                                         <input type="date" required name="selesai" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-2">
-                                                        <button class="btn btn-gradient-04" name = "submit" type="submit">Select</button>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 form-control-label d-flex justify-content-lg-end"></label>
+                                                <div class="col-sm-10">
+                                                    <div class="row">
+                                                        <label class="col-lg-2">Kios</label>
+                                                        <div class="col-lg-8">
+                                                            <div class="select">
+                                                                <select name="kios" class="custom-select form-control" required>
+                                                                    <option value="">Pilih Kios</option>
+                                                                    <?php foreach ($kios as $key):
+                                                                        ?>
+                                                                        <option value="<?= $key->kios_nama."(".$key->kios_cabang.")"?>"><?= $key->kios_nama."(".$key->kios_cabang.")"?></option>
+                                                                    <?php
+                                                                    endforeach;
+                                                                    ?>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select an option
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 form-control-label d-flex justify-content-lg-end"></label>
+                                                <div class="col-sm-10">
+                                                    <div class="row">
+                                                        <label class="col-lg-2">Transaksi</label>
+                                                        <div class="col-lg-8">
+                                                            <div class="select">
+                                                                <select name="transaksi" class="custom-select form-control" required>
+                                                                    <option value="">Pilih Transaksi</option>
+                                                                         <option value="pulsa">Pulsa</option>
+                                                                    <option value="paket">Paket</option>
+                                                                 </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select an option
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 float-right">
+                                                <button class="btn btn-gradient-04" name = "submit" type="submit">Select</button>
+                                            </div>
                                     </form>
                                 </div>
                             </div>
@@ -89,11 +135,13 @@
                             <tr>
                                 <th>No</th>
                                 <th>Keterangan</th>
+                                <th>Kios</th>
                                 <th>Pulsa</th>
                                 <th>Jumlah</th>
                                 <th>Total</th>
                                 <th>Waktu</th>
                                 <th>Jenis</th>
+                                <th>Transaksi</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -105,34 +153,83 @@
                             foreach ($data as $key) {
                                 if ($key->transaksi_jenis == 'debit' && $this->uri->segment(3)=='masuk' ){
                                     $totaldebit+= $key->transaksi_total;
-                                    ?>
-                                    <tr>
-                                        <td><span class="text-primary"><?= $no++ ?></span></td>
-                                        <td><?= $key->transaksi_keterangan ?></td>
-                                        <td><?= $key->paket_nama ?></td>
-                                        <td><?= $key->transaksi_jumlah ?></td>
-                                        <td><?= $key->transaksi_total ?></td>
-                                        <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
-                                        <td>Pemasukan</td>
-                                    </tr>
-                                <?php }
+                                    if ($kios_param == null && $transaksi_param==null){
+                                        ?>
+                                        <tr>
+                                            <td><span class="text-primary"><?= $no++ ?></span></td>
+                                            <td><?= $key->transaksi_keterangan ?></td>
+                                            <td><?= $key->kios_nama."(".$key->kios_cabang.")"?> </td>
+                                            <td><?= $key->paket_nama ?></td>
+                                            <td><?= $key->transaksi_jumlah ?></td>
+                                            <td><?= $key->transaksi_total ?></td>
+                                            <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
+                                            <td>Pemasukan</td>
+                                            <td><?= $key->transaksi_pilihan?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    else{
+                                        if ($kios_param == $key->kios_nama."(".$key->kios_cabang.")"){
+                                            echo $transaksi_param;
+                                            if ($transaksi_param == $key->transaksi_pilihan){
+                                                ?>
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++ ?></span></td>
+                                                    <td><?= $key->transaksi_keterangan ?></td>
+                                                    <td><?= $key->kios_nama."(".$key->kios_cabang.")"?> </td>
+                                                    <td><?= $key->paket_nama ?></td>
+                                                    <td><?= $key->transaksi_jumlah ?></td>
+                                                    <td><?= $key->transaksi_total ?></td>
+                                                    <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
+                                                    <td>Pemasukan</td>
+                                                    <td><?= $key->transaksi_pilihan?></td>
+                                                </tr>
+                                                <?php
+                                            }
+
+                                        }
+                                    }
+}
                                 else if( $key->transaksi_jenis == 'kredit' && $this->uri->segment(3)=='keluar' ){
                                     $totalkredit += $key->transaksi_total;
-                                    ?>
-                                    <tr>
-                                        <td><span class="text-primary"><?= $no++ ?></span></td>
-                                        <td><?= $key->transaksi_keterangan ?></td>
-                                        <td><?= $key->paket_nama ?></td>
-                                        <td><?= $key->transaksi_jumlah ?></td>
-                                        <td><?= $key->transaksi_total ?></td>
-                                        <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
-                                        <td>Pengeluaran</td>
-                                    </tr>
-                            <?php
+                                    if ($kios_param == null && $transaksi_param==null){
+                                        ?>
+                                        <tr>
+                                            <td><span class="text-primary"><?= $no++ ?></span></td>
+                                            <td><?= $key->transaksi_keterangan ?></td>
+                                            <td><?= $key->kios_nama."(".$key->kios_cabang.")"?> </td>
+                                            <td><?= $key->paket_nama ?></td>
+                                            <td><?= $key->transaksi_jumlah ?></td>
+                                            <td><?= $key->transaksi_total ?></td>
+                                            <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
+                                            <td>Pemasukan</td>
+                                            <td><?= $key->transaksi_pilihan?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    else{
+                                        if ($kios_param == $key->kios_nama."(".$key->kios_cabang.")"){
+                                            if ($transaksi_param == $key->transaksi_pilihan){
+                                                ?>
+                                                <tr>
+                                                    <td><span class="text-primary"><?= $no++ ?></span></td>
+                                                    <td><?= $key->transaksi_keterangan ?></td>
+                                                    <td><?= $key->kios_nama."(".$key->kios_cabang.")"?> </td>
+                                                    <td><?= $key->paket_nama ?></td>
+                                                    <td><?= $key->transaksi_jumlah ?></td>
+                                                    <td><?= $key->transaksi_total ?></td>
+                                                    <td><?= date_indo(date("Y-m-d", strtotime($key->transaksi_waktu))) ?></td>
+                                                    <td>Pemasukan</td>
+                                                    <td><?= $key->transaksi_pilihan?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                    }
                                 }
 
                             }?>
-                            <tr><td colspan="5"></td>
+                            <tr><td colspan="7"></td>
                                 <td >Total Keseluruhan</td>
                                 <td>Rp. <?php
                                     if ($this->uri->segment(3)=='masuk'){
